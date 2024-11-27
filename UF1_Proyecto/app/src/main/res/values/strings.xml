@@ -1,5 +1,8 @@
 <resources>
     <string name="app_name">UF1_Proyecto</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="welcomeTitle">Buscador de eventos</string>
+
+    <string name="hello_blank_fragment">Buscador de eventos</string>
+    <string name="searchButton">Buscar</string>
+    <string name="welcomeDescription">Busca que eventos se han celebrado en el lugar y fecha que indiques</string>
 </resources>
