@@ -5,16 +5,16 @@
     <item
         android:id="@+id/homeFragment"
         android:icon="@drawable/ic_home"
-        android:title="Inicio"
+        android:title="@string/home"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_search"
-        android:title="Busqueda"
+        android:title="@string/browse"
         app:showAsAction="ifRoom"/>
     <item
         android:id="@+id/favoriteFragment"
         android:icon="@drawable/ic_star"
-        android:title="Favoritos"
+        android:title="@string/favorites"
         app:showAsAction="ifRoom"/>
 </menu>

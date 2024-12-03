@@ -5,10 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.uf1_proyecto.databinding.FragmentHomeBinding
 import com.example.uf1_proyecto.databinding.FragmentSearchBinding
 import com.example.uf1_proyecto.viewmodel.BookViewModel
 
@@ -30,7 +28,7 @@ class SearchFragment : Fragment() {
         val reciclerView = binding.reciclerView
 
         button.setOnClickListener{
-            bookViewModel.fetchBooks("hola")
+            bookViewModel.fetchBooks(binding.textInput.text.toString())
             bookViewModel.books.observe(viewLifecycleOwner){ books->
                 reciclerView.layoutManager = LinearLayoutManager(context)
                 bookAdapter = BookAdapter(books)

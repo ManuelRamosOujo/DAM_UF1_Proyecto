@@ -1,8 +1,11 @@
 <resources>
     <string name="app_name">UF1_Proyecto</string>
-    <string name="welcomeTitle">Buscador de eventos</string>
+    <string name="welcomeTitle">Book browser</string>
 
-    <string name="hello_blank_fragment">Buscador de libros</string>
-    <string name="searchButton">Buscar</string>
-    <string name="welcomeDescription">Busca cualquier libro que quieras por título o autor</string>
+    <string name="hello_blank_fragment">Book browser</string>
+    <string name="searchButton">Search</string>
+    <string name="welcomeDescription">Search for any book you want, by name or author</string>
+    <string name="home">Home</string>
+    <string name="browse">Browse</string>
+    <string name="favorites">Favorites</string>
 </resources>
