@@ -25,11 +25,19 @@ class SearchFragment : Fragment() {
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
 
         val button = binding.searchButton
-        val reciclerView = binding.reciclerView
+        val reciclerView = binding.recyclerView
+
+        if(bookViewModel.books.isInitialized){
+            bookViewModel.books.observe(viewLifecycleOwner){ books ->
+                reciclerView.layoutManager = LinearLayoutManager(context)
+                bookAdapter = BookAdapter(books)
+                reciclerView.adapter = bookAdapter
+            }
+        }
 
         button.setOnClickListener{
             bookViewModel.fetchBooks(binding.textInput.text.toString())
-            bookViewModel.books.observe(viewLifecycleOwner){ books->
+            bookViewModel.books.observe(viewLifecycleOwner){ books ->
                 reciclerView.layoutManager = LinearLayoutManager(context)
                 bookAdapter = BookAdapter(books)
                 reciclerView.adapter = bookAdapter

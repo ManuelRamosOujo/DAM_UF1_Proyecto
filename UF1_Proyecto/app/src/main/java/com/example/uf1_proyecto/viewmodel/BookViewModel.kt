@@ -12,6 +12,7 @@ class BookViewModel : ViewModel() {
     private val bookRepository = BookRepository()
     private val _books = MutableLiveData<List<Book>>()
     val books : LiveData<List<Book>> get() = _books
+    var favoriteBooks  : MutableList<Book> = mutableListOf()
 
     fun fetchBooks(query : String) {
         viewModelScope.launch {
@@ -20,6 +21,14 @@ class BookViewModel : ViewModel() {
                 _books.postValue(bookList)
             } catch (e: Exception) {
                 println("Error" + e)
+            }
+        }
+    }
+
+    fun setFavoriteByKey(key : String) {
+        books.value!!.forEach{
+            if (it.key == key){
+                favoriteBooks.add(it)
             }
         }
     }

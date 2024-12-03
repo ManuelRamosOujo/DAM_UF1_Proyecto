@@ -1,5 +1,6 @@
 package com.example.uf1_proyecto
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto.model.Book
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
@@ -24,8 +26,39 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
         holder.yearTextView.text = book.first_publish_year?.toString() ?: "N/A"
 
         book.cover_i?.let {
-            val imageUrl = "https://covers.openlibrary.org/b/id/$it-L.jpg"
-            Picasso.get().load(imageUrl).into(holder.coverImageView)
+            val imageUrlL = "https://covers.openlibrary.org/b/id/$it-L.jpg"
+            val imageUrlM = "https://covers.openlibrary.org/b/id/$it-M.jpg"
+            val imageUrlS = "https://covers.openlibrary.org/b/id/$it-S.jpg"
+
+            Picasso.get()
+                .load(imageUrlL)
+                .into(holder.coverImageView, object : Callback {
+                    override fun onSuccess() {
+                        holder.coverImageView.setBackgroundColor(Color.TRANSPARENT)
+                    }
+                    override fun onError(e: Exception?) {
+                        Picasso.get()
+                            .load(imageUrlM)
+                            .into(holder.coverImageView, object : Callback {
+                                override fun onSuccess() {
+                                    holder.coverImageView.setBackgroundColor(Color.TRANSPARENT)
+                                }
+                                override fun onError(e: Exception?) {
+                                    Picasso.get()
+                                        .load(imageUrlS)
+                                        .into(holder.coverImageView, object : Callback {
+                                            override fun onSuccess() {
+                                                holder.coverImageView.setBackgroundColor(Color.TRANSPARENT)
+                                            }
+                                            override fun onError(e: Exception?) {
+                                                holder.coverImageView.setBackgroundColor(Color.GRAY)
+                                            }
+                                        })
+                                }
+                            })
+                    }
+                })
+            println("$book = $it")
         }
     }
 
