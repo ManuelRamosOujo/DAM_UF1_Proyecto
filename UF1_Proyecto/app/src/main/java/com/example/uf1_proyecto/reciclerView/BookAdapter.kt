@@ -5,13 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.uf1_proyecto.model.Book
+import com.example.uf1_proyecto.viewmodel.BookViewModel
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
-class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
+class BookAdapter(private val books: List<Book>, private val viewModel: BookViewModel, private var owner: LifecycleOwner) : RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_book, parent, false)
@@ -30,7 +34,7 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
             holder.imageText.visibility = View.VISIBLE;
             holder.coverImageView.setImageDrawable(null)
         } else {
-            book.cover_i?.let {
+            book.cover_i.let {
                 val imageUrlL = "https://covers.openlibrary.org/b/id/$it-L.jpg"
                 val imageUrlM = "https://covers.openlibrary.org/b/id/$it-M.jpg"
                 val imageUrlS = "https://covers.openlibrary.org/b/id/$it-S.jpg"
@@ -66,7 +70,20 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
                                 })
                         }
                     })
-                holder.imageText.visibility = View.GONE;
+                holder.imageText.visibility = View.GONE
+            }
+        }
+
+        checkFavorite(book.key){ isFavorite ->
+            if (isFavorite) holder.favoriteIcon.setColorFilter(Color.RED)
+            else holder.favoriteIcon.setColorFilter(Color.BLACK)
+        }
+
+        holder.card.setOnClickListener{
+            viewModel.insertBook(book)
+            checkFavorite(book.key){ isFavorite ->
+                  if (isFavorite) holder.favoriteIcon.setColorFilter(Color.RED)
+                  else holder.favoriteIcon.setColorFilter(Color.BLACK)
             }
         }
     }
@@ -75,11 +92,19 @@ class BookAdapter(private val books: List<Book>) : RecyclerView.Adapter<BookAdap
         return books.size
     }
 
+     private fun checkFavorite(key: String, callback: (Boolean) -> Unit){
+         viewModel.getKey(key).observe(owner, Observer{ item ->
+             callback(item != null)
+         })
+     }
+
     class BookViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val card: LinearLayout = itemView.findViewById(R.id.card)
         val titleTextView: TextView = itemView.findViewById(R.id.book_title)
         val authorTextView: TextView = itemView.findViewById(R.id.book_author)
         val yearTextView: TextView = itemView.findViewById(R.id.book_year)
         val coverImageView: ImageView = itemView.findViewById(R.id.book_cover)
         val imageText: TextView = itemView.findViewById(R.id.imageText)
+        val favoriteIcon: ImageView = itemView.findViewById(R.id.favorite_icon)
     }
 }

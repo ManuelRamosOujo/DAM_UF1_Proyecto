@@ -2,11 +2,12 @@
 <resources>
     <string name="app_name">UF1_Proyecto</string>
     <string name="welcomeTitle">Buscador de eventos</string>
-
     <string name="hello_blank_fragment">Buscador de libros</string>
     <string name="searchButton">Buscar</string>
     <string name="welcomeDescription">Busca cualquier libro que quieras por título o autor</string>
     <string name="home">Inicio</string>
     <string name="browse">Busqueda</string>
     <string name="favorites">Favoritos</string>
+    <string name="noImage">Sin imagen</string>
+    <string name="imageDescription">Imagen</string>
 </resources>

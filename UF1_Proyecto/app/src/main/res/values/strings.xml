@@ -1,11 +1,12 @@
 <resources>
     <string name="app_name">UF1_Proyecto</string>
     <string name="welcomeTitle">Book browser</string>
-
     <string name="hello_blank_fragment">Book browser</string>
     <string name="searchButton">Search</string>
     <string name="welcomeDescription">Search for any book you want, by name or author</string>
     <string name="home">Home</string>
     <string name="browse">Browse</string>
     <string name="favorites">Favorites</string>
+    <string name="noImage">No image</string>
+    <string name="imageDescription">Image</string>
 </resources>
