@@ -1,4 +1,4 @@
-package com.example.uf1_proyecto
+package com.example.uf1_proyecto.reciclerView
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
+import com.example.uf1_proyecto.R
 import com.example.uf1_proyecto.model.Book
 import com.example.uf1_proyecto.viewmodel.BookViewModel
 import com.squareup.picasso.Callback

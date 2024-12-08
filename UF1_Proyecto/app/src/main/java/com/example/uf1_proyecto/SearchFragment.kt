@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uf1_proyecto.databinding.FragmentSearchBinding
+import com.example.uf1_proyecto.reciclerView.BookAdapter
 import com.example.uf1_proyecto.viewmodel.BookViewModel
 
 class SearchFragment : Fragment() {

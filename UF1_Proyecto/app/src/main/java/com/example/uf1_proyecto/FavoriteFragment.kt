@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uf1_proyecto.databinding.FragmentFavoriteBinding
-import com.example.uf1_proyecto.databinding.FragmentSearchBinding
+import com.example.uf1_proyecto.reciclerView.BookAdapter
 import com.example.uf1_proyecto.viewmodel.BookViewModel
 
 class FavoriteFragment : Fragment() {
@@ -31,7 +31,7 @@ class FavoriteFragment : Fragment() {
     }
 
     private fun loadList(){
-        bookViewModel.favoriteBooks.observe(viewLifecycleOwner){ books ->
+        bookViewModel.books.observe(viewLifecycleOwner){ books ->
             binding.recyclerView.layoutManager = LinearLayoutManager(context)
             bookAdapter = BookAdapter(books, bookViewModel, this)
             binding.recyclerView.adapter = bookAdapter

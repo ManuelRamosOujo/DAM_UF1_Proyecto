@@ -1,7 +1,6 @@
 package com.example.uf1_proyecto.viewmodel
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -15,8 +14,6 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     private val bookRepository = BookRepository()
     private val _books = MutableLiveData<List<Book>>()
     val books : LiveData<List<Book>> get() = _books
-    private val _favoriteBooks = MutableLiveData<List<Book>>()
-    val favoriteBooks: LiveData<List<Book>> get() = _favoriteBooks
     private val db = BookDatabase.getDatabase(getApplication())
 
     fun fetchBooks(query : String) {
@@ -51,7 +48,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllBooks() {
         viewModelScope.launch {
             val books = db.bookDao().getAllBooks()
-            _favoriteBooks.postValue(books)
+            _books.postValue(books)
         }
     }
 
