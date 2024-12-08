@@ -6,28 +6,35 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uf1_proyecto.databinding.FragmentFavoriteBinding
 import com.example.uf1_proyecto.databinding.FragmentSearchBinding
 import com.example.uf1_proyecto.viewmodel.BookViewModel
 
 class FavoriteFragment : Fragment() {
-    var _binding: FragmentFavoriteBinding? = null
-    val binding get() = _binding!!
+    private var _binding: FragmentFavoriteBinding? = null
+    private val binding get() = _binding!!
     private lateinit var bookViewModel: BookViewModel
     private lateinit var bookAdapter: BookAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         val view = binding.root
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
+        bookViewModel.getAllBooks()
 
-
-
+        loadList()
         return view
     }
 
-
+    private fun loadList(){
+        bookViewModel.favoriteBooks.observe(viewLifecycleOwner){ books ->
+            binding.recyclerView.layoutManager = LinearLayoutManager(context)
+            bookAdapter = BookAdapter(books, bookViewModel, this)
+            binding.recyclerView.adapter = bookAdapter
+        }
+    }
 }

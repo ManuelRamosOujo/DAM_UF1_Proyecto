@@ -2,6 +2,7 @@ package com.example.uf1_proyecto.model
 
 import androidx.annotation.NonNull
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Entity
 import androidx.room.Insert
 import androidx.room.PrimaryKey
@@ -23,6 +24,9 @@ data class Book(
 interface BookDao {
     @Insert
     suspend fun insertBook(book: Book)
+
+    @Delete
+    suspend fun deleteBook(book: Book)
 
     @Query("SELECT * FROM Book")
     suspend fun getAllBooks(): List<Book>

@@ -80,10 +80,12 @@ class BookAdapter(private val books: List<Book>, private val viewModel: BookView
         }
 
         holder.card.setOnClickListener{
-            viewModel.insertBook(book)
-            checkFavorite(book.key){ isFavorite ->
-                  if (isFavorite) holder.favoriteIcon.setColorFilter(Color.RED)
-                  else holder.favoriteIcon.setColorFilter(Color.BLACK)
+            checkFavorite(book.key) { isFavorite ->
+                if (isFavorite) viewModel.deleteBook(book){
+                    holder.favoriteIcon.setColorFilter(Color.BLACK)
+                } else viewModel.insertBook(book){
+                    holder.favoriteIcon.setColorFilter(Color.RED)
+                }
             }
         }
     }

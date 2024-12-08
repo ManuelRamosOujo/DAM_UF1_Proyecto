@@ -13,15 +13,15 @@ import com.example.uf1_proyecto.databinding.FragmentSearchBinding
 import com.example.uf1_proyecto.viewmodel.BookViewModel
 
 class SearchFragment : Fragment() {
-    var _binding: FragmentSearchBinding? = null
-    val binding get() = _binding!!
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
     private lateinit var bookViewModel: BookViewModel
     private lateinit var bookAdapter: BookAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSearchBinding.inflate(inflater, container, false)
         val view = binding.root
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]

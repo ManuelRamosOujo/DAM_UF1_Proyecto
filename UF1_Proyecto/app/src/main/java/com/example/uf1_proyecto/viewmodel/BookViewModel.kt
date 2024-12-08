@@ -30,10 +30,20 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
         }
     }
 
-    fun insertBook(book: Book) {
+    fun insertBook(book: Book, onComplete: () -> Unit) {
         viewModelScope.launch {
             if(db.bookDao().getKey(book.key).isNullOrEmpty()){
                 db.bookDao().insertBook(book)
+                onComplete()
+            }
+        }
+    }
+
+    fun deleteBook(book: Book, onComplete: () -> Unit) {
+        viewModelScope.launch {
+            if(!db.bookDao().getKey(book.key).isNullOrEmpty()){
+                db.bookDao().deleteBook(book)
+                onComplete()
             }
         }
     }
@@ -41,7 +51,7 @@ class BookViewModel(application: Application) : AndroidViewModel(application) {
     fun getAllBooks() {
         viewModelScope.launch {
             val books = db.bookDao().getAllBooks()
-            _favoriteBooks.value = books
+            _favoriteBooks.postValue(books)
         }
     }
 
