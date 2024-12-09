@@ -26,9 +26,11 @@ class HomeFragment : Fragment() {
         val view = binding.root
         bookViewModel = ViewModelProvider(this)[BookViewModel::class.java]
 
-        bookViewModel.fetchBooks(selectRandomString())
-        loadList()
+        if(!bookViewModel.books.isInitialized){
+            bookViewModel.fetchBooks(selectRandomString())
+        }
 
+        loadList()
         return view
     }
 
